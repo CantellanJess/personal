@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        legend {color:rgb(0, 96, 131);}
+        input, p, textarea {color: rgb(0, 130, 141);}
+    </style>
+<body style="background-color:rgb(237, 240, 223);">
+
+<form action="http://www.gmail.com" method="post">
+<fieldset>
+    <legend>Please leave feedback!</legend>
+    Name:<br><input type="text" name="Full Name">
+    <br>
+    E-mail:<br><input type="text" name="E-mail">
+    <br>
+    <p>How did you find this page?</p>
+    <input type="checkbox" name="professor" value="professor">Professor<br>
+    <input type="checkbox" name="students" value="students">Student<br>
+    <input type="checkbox" name="ac" value="academic coach">Academic Coach<br>
+    <input type="checkbox" name="teacher" value="teacher">Teacher<br>
+    
+    <br>
+    <p>What would you rate this?</p>
+    <input type="radio" name="rate" value="five">5<br>
+    <input type="radio" name="rate" value="four">4<br>
+    <input type="radio" name="rate" value="three">3<br>
+    <input type="radio" name="rate" value="two">2<br>
+    <input type="radio" name="rate" value="one">1<br>
+    <input type="radio" name="rate" value="zero">0<br>
+    <br>
+
+    <p>Additional Comments: </p>
+    <textarea name="comments" rows="4" cols="50"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Reset">
+
+</fieldset>
+</form>
+</body>
+</html>

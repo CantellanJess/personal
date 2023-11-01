@@ -1,0 +1,64 @@
+#outer-wrapper {width: 80%; 
+              margin: 0 auto 0 auto;
+}
+
+img { float: right; 
+	width: 300px; height: 300px; border-radius: 35px;
+    padding: 20px; 
+}
+
+header{	background-color:  rgb(34, 48, 60);
+        padding: 10% 0 15% 0; 
+        border-radius: 35px;
+        text-indent: 10%;
+        color: rgb(255, 255, 255);
+  }
+
+nav{border-radius: 45px;
+    background-color:  rgb(34, 48, 60);
+    color: rgb(255, 255, 255);
+}
+
+section{ padding: 5%;
+    border-radius: 35px;
+    background-color:  rgb(34, 48, 60);
+    color: rgb(255, 255, 255);
+}
+
+body{border-radius: 35px;
+    padding: 25px;
+    font-size: 25px;
+    background-color:  rgb(34, 48, 60);
+    color: rgb(255, 255, 255);
+}
+
+footer {padding: 1%; 
+    border-radius: 35px;
+    background-color:  rgb(34, 48, 60);
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+h1, h2, h3 { font-family: Verdana, sans-serif; 
+    padding-top: 5%; 
+  }
+
+li { list-style-type: none; 
+	text-align: center;
+    padding-inline: 20px;
+    text-indent: 180px;
+}
+
+#allCards{
+    display: flex;
+    border-radius: 35px;
+}
+
+#icons{
+    padding-top: 5%; 
+    display: flex; 
+}
+
+#card{
+    background-color:  rgb(34, 48, 60)
+}
