@@ -2,18 +2,20 @@
               margin: 0 auto 0 auto;
 }
 
-img { float: center; 
+img { float: right; 
 	width: 300px; height: 300px; border-radius: 35px;
-    padding: 20px; 
+    padding: 0;
+    -webkit-box-flex: 10;
+        -ms-flex-: 3;
 }
 
 header{	background-color:  rgb(34, 48, 60);
-        padding: 10% 0 15% 0; 
+        padding: 8% 3% 8% 3%; 
         border-radius: 35px;
         text-indent: 10%;
         color: rgb(255, 255, 255);
-        -webkit-box-flex-group: 3;
-        -ms-flex-: 3;
+        -webkit-box-flex: 3;
+        -ms-flex-: 5;
   }
 
 nav{border-radius: 45px;
