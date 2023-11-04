@@ -1,11 +1,12 @@
-img { border-radius: 35px;
+img {
+    border-radius: 35px;
     width: 300px; height: 300px;
 }
 
-header{	background-color:  rgb(34, 48, 60);
-        /*padding: 8% 3% 8% 3%; */
-        
-        color: rgb(255, 255, 255);
+header{
+    background-color:  rgb(34, 48, 60);
+    /*padding: 8% 3% 8% 3%; */
+    color: rgb(255, 255, 255);
         
   }
 
@@ -15,8 +16,7 @@ nav{
 
 }
 
-section{ 
-    
+section{
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
 }
@@ -28,18 +28,19 @@ body{
 }
 
 footer {
-    
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
     text-align: center;
 }
 
-h1, h2, h3 { font-family: Verdana, sans-serif; 
+h1, h2, h3 { 
+    font-family: Verdana, sans-serif; 
     padding-top: 1%; 
     text-align: center;
   }
 
-li { list-style-type: none; 
+li { 
+    list-style-type: none; 
 	text-align: center;
     padding-inline: 20px;
     text-indent: 180px;
