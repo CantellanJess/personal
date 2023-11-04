@@ -1,8 +1,6 @@
 img {
     border-radius: 35px;
     width: 300px; height: 300px;
-    float: left;
-
 }
 
 header{
@@ -63,6 +61,7 @@ li {
 }
 
 
+
 /* Style for accordion headers */
 .accordion-header {
     background-color: rgb(34, 48, 60); /* Change the background color */
@@ -91,4 +90,12 @@ li {
   .accordion-item.active .accordion-header {
     background-color: rgb(34, 48, 60); /* Change the background color for active header */
   }
+  
+
+  .image-and-heading {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px; /* Adjust the gap as needed to create space between the image and heading */
+  }
+  
   
