@@ -1,11 +1,9 @@
-img { float: right; 
-	 border-radius: 35px;
-    padding: 0;
+img { border-radius: 35px;
     width: 300px; height: 300px;
 }
 
 header{	background-color:  rgb(34, 48, 60);
-        padding: 8% 3% 8% 3%; 
+        /*padding: 8% 3% 8% 3%; */
         border-radius: 35px;
         color: rgb(255, 255, 255);
         
@@ -23,8 +21,7 @@ section{ padding: 5%;
     color: rgb(255, 255, 255);
 }
 
-body{border-radius: 35px;
-    padding: 25px;
+body{padding: 25px;
     font-size: 25px;
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
