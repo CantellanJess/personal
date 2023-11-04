@@ -70,6 +70,29 @@ li { list-style-type: none;
     background-color:  rgb(34, 48, 60)
 }
 
-@media (max-width: 768px) {
-    /* CSS rules for screens with a maximum width of 768px (e.g., smartphones) */
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
   }
+  
+  h1 {
+    font-size: 2rem;
+  }
+
+  /* Default styles for all screen sizes */
+
+@media (max-width: 768px) {
+    /* Styles for screens with a maximum width of 768px (e.g., smartphones) */
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    /* Styles for screens between 769px and 1024px (e.g., tablets) */
+  }
+  
+  @media (min-width: 1025px) {
+    /* Styles for screens larger than 1024px (e.g., desktops) */
+  }
+  
+  
