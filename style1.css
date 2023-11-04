@@ -8,23 +8,19 @@ header{	background-color:  rgb(34, 48, 60);
         padding: 8% 3% 8% 3%; 
         border-radius: 35px;
         color: rgb(255, 255, 255);
-        -webkit-box-flex: 3;
-        -ms-flex-: 5;
+        
   }
 
 nav{border-radius: 45px;
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
-    -webkit-box-flex-group: 3;
-        -ms-flex-: 3;
+
 }
 
 section{ padding: 5%;
     border-radius: 35px;
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
-    -webkit-box-flex-group: 3;
-        -ms-flex-: 3;
 }
 
 body{border-radius: 35px;
@@ -32,8 +28,6 @@ body{border-radius: 35px;
     font-size: 25px;
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
-    -webkit-box-flex-group: 3;
-        -ms-flex-: 3;
 }
 
 footer {padding: 1%; 
@@ -41,8 +35,6 @@ footer {padding: 1%;
     background-color:  rgb(34, 48, 60);
     color: rgb(255, 255, 255);
     text-align: center;
-    -webkit-box-flex-group: 3;
-        -ms-flex-: 3;
 }
 
 h1, h2, h3 { font-family: Verdana, sans-serif; 
@@ -71,28 +63,5 @@ li { list-style-type: none;
 }
 
 
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  h1 {
-    font-size: 2rem;
-  }
-
-  /* Default styles for all screen sizes */
-
-@media (max-width: 768px) {
-    /* Styles for screens with a maximum width of 768px (e.g., smartphones) */
-  }
-  
-  @media (min-width: 769px) and (max-width: 1024px) {
-    /* Styles for screens between 769px and 1024px (e.g., tablets) */
-  }
-  
-  @media (min-width: 1025px) {
-    /* Styles for screens larger than 1024px (e.g., desktops) */
-  }
   
   
