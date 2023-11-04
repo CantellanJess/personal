@@ -1,8 +1,7 @@
 img { float: right; 
-	width: 300px; height: 300px; border-radius: 35px;
+	 border-radius: 35px;
     padding: 0;
-    -webkit-box-flex: 2;
-        -ms-flex-: 2;
+    width: 300px; height: 300px;
 }
 
 header{	background-color:  rgb(34, 48, 60);
@@ -70,3 +69,7 @@ li { list-style-type: none;
 #card{
     background-color:  rgb(34, 48, 60)
 }
+
+@media (max-width: 768px) {
+    /* CSS rules for screens with a maximum width of 768px (e.g., smartphones) */
+  }
