@@ -4,32 +4,31 @@ img {
 }
 
 header{
-    background-color:  rgb(34, 48, 60);
-    padding: 8% 3% 8% 3%;
-    color: rgb(255, 255, 255);
-        
+    background-color:  rgb(255, 255, 255);
+    color: rgb(34, 48, 60);  
+    padding: 8% 3% 8% 3%;      
   }
 
 main{
-    background-color:  rgb(34, 48, 60);
-    color: rgb(255, 255, 255);
+    background-color:  rgb(255, 255, 255);
+    color: rgb(34, 48, 60); 
 
 }
 
 section{
-    background-color:  rgb(34, 48, 60);
-    color: rgb(255, 255, 255);
+    background-color:  rgb(255, 255, 255);
+    color: rgb(34, 48, 60); 
 }
 
 body{
     font-size: 25px;
-    background-color:  rgb(34, 48, 60);
-    color: rgb(255, 255, 255);
+    background-color:  rgb(255, 255, 255);
+    color: rgb(34, 48, 60); 
 }
 
 footer {
-    background-color:  rgb(34, 48, 60);
-    color: rgb(255, 255, 255);
+    background-color:  rgb(255, 255, 255);
+    color: rgb(34, 48, 60); 
     text-align: center;
 }
 
@@ -49,11 +48,14 @@ li {
 #allCards{
     display: flex;
     border-radius: 35px;
+    padding: 2% 1% 2% 1%;
+    
 }
 
 #icons{
     padding-top: 5%; 
     display: flex; 
+    padding: 100px;  
 }
 
 #card{
@@ -90,12 +92,6 @@ li {
   .accordion-item.active .accordion-header {
     background-color: rgb(34, 48, 60); /* Change the background color for active header */
   }
-  
 
-  .image-and-heading {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-gap: 10px; /* Adjust the gap as needed to create space between the image and heading */
-  }
   
   
