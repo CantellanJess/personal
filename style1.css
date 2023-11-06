@@ -12,7 +12,6 @@ header{
 main{
     background-color:  rgb(255, 255, 255);
     color: rgb(34, 48, 60); 
-
 }
 
 section{
@@ -23,7 +22,6 @@ section{
 body{
     font-size: 25px;
     background-color:  rgb(255, 255, 255);
-    color: rgb(34, 48, 60); 
 }
 
 footer {
@@ -92,6 +90,3 @@ li {
   .accordion-item.active .accordion-header {
     background-color: rgb(255, 255, 255); /* Change the background color for active header */
   }
-
-  
-  
