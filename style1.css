@@ -52,9 +52,8 @@ li {
 
 #icons{
     padding-top: 5%; 
-    display: flex; 
-    padding: 100px;  
-    padding-inline: 20px;
+    display: flex;  
+    padding: 8% 3% 8% 3%; 
 }
 
 #card{
