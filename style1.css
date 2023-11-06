@@ -6,7 +6,6 @@ img {
 header{
     background-color:  rgb(255, 255, 255);
     color: rgb(34, 48, 60);  
-    /*padding: 8% 3% 8% 3%;    */
   }
 
 main{
@@ -53,7 +52,7 @@ li {
 #icons{
     padding-top: 5%; 
     display: flex;  
-    padding: 8% 3% 8% 3%; 
+    /*padding: 8% 3% 8% 3%; */
 }
 
 #card{
