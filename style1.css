@@ -54,6 +54,7 @@ li {
     padding-top: 5%; 
     display: flex; 
     padding: 100px;  
+    padding-inline: 20px;
 }
 
 #card{
