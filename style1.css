@@ -1,6 +1,6 @@
 img {
     border-radius: 35px;
-    width: 300px; height: 300px;
+    width: 350px; height: 300px;
 }
 
 header{
@@ -47,7 +47,6 @@ li {
     display: flex;
     border-radius: 35px;
     padding: 2% 1% 2% 1%;
-    
 }
 
 #icons{
@@ -89,3 +88,8 @@ li {
   .accordion-item.active .accordion-header {
     background-color: rgb(255, 255, 255); /* Change the background color for active header */
   }
+
+#frontEnd{
+  transform: skew(-8deg,0deg);
+  box-shadow: 20px 10px;
+}
