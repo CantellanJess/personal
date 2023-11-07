@@ -93,3 +93,9 @@ li {
   transform: skew(-8deg,0deg);
   box-shadow: 20px 10px 5px;
 } 
+
+#grad1 {
+  height: 200px;
+  background-color: red; /* For browsers that do not support gradients */
+  background-image: linear-gradient(to right, red , yellow);
+}
