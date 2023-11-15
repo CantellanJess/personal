@@ -46,9 +46,9 @@ li {
 #allCards{
     display: flex;
     flex-wrap: wrap;
-    align-content: centers;
+    align-content: center;
     border-radius: 35px;
-    padding: 2% 1% 2% 1%;
+    padding: 2% 1% 2% 18%;
 }
 
 #icons{
