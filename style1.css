@@ -38,7 +38,7 @@ h1, h2, h3 {
 
 li { 
     list-style-type: none; 
-	text-align: center;
+	  text-align: center;
     padding-inline: 20px;
     text-indent: 180px;
 }
@@ -46,8 +46,9 @@ li {
 #allCards{
     display: flex;
     flex-wrap: wrap;
+    align-content: centers;
     border-radius: 35px;
-    padding: 5% 1% 2% 1%;
+    padding: 2% 1% 2% 1%;
 }
 
 #icons{
@@ -104,7 +105,7 @@ li {
   height: 30rem;
   gap: 3rem;
 }
-*/
+
 .allCards > div{
   flex: 1;
   border-radius: 1rem;
@@ -116,8 +117,9 @@ li {
 .allCards > div:hover{
   flex: 2;
 }
+*/
 
-.card-img-top{
-  border-radius: 1rem;
-  width: 200px; height: 200px;
+.card:hover{
+  transform: translateY(-20px);
+  right: 20px;
 }
