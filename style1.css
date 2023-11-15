@@ -72,9 +72,6 @@ li {
     padding: 10px;
     cursor: pointer;
   }
-  .accordion-header:hover{
-    transform: translateY(-20px);
-  }
   
   /* Style for accordion content (hidden by default) */
   .accordion-content {
