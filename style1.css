@@ -101,6 +101,7 @@ li {
 
 .allCards{
   display: flex;
+  flex-wrap: wrap;
   height: 30rem;
   gap: 1rem;
 }
@@ -116,4 +117,9 @@ li {
 
 .allCards > div:hover{
   flex: 2;
+}
+
+.card-img-top{
+  border-radius: 35px;
+    width: 3px; height: 300px;
 }
