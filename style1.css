@@ -47,7 +47,7 @@ li {
     display: flex;
     flex-wrap: wrap;
     border-radius: 35px;
-    padding: 2% 1% 2% 1%;
+    padding: 5% 1% 2% 1%;
 }
 
 #icons{
@@ -98,13 +98,13 @@ li {
   background-color: red; /* For browsers that do not support gradients */
   background-image: linear-gradient(to right, red , yellow);
 }
-
+/*
 .allCards{
   display: flex;
   height: 30rem;
-  gap: 1rem;
+  gap: 3rem;
 }
-
+*/
 .allCards > div{
   flex: 1;
   border-radius: 1rem;
@@ -113,12 +113,11 @@ li {
   background-size: auto 100%;
   transition: all .8s cubic-bezier(.25, .4, .45, 1.4);
 }
-
 .allCards > div:hover{
   flex: 2;
 }
 
 .card-img-top{
-  border-radius: 35px;
-    width: 3px; height: 300px;
+  border-radius: 1rem;
+  width: 200px; height: 200px;
 }
