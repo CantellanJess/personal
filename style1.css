@@ -43,14 +43,14 @@ li {
     text-indent: 180px;
 }
 
-#allCards{
+/*#allCards{
     display: flex;
     flex-wrap: wrap;
     align-content: center;
     border-radius: 35px;
     padding: 2% 1% 2% 5%;
 
-}
+}*/
 
 #icons{
     padding-top: 5%; 
@@ -103,4 +103,23 @@ li {
   height: 200px;
   background-color: red; /* For browsers that do not support gradients */
   background-image: linear-gradient(to right, red , yellow);
+}
+
+.allCards{
+  display: flex;
+  height: 20rem;
+  gap: 1rem;
+}
+
+.allCards > div{
+  flex: 1;
+  border-radius: 1rem;
+  background-position: centerl;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  transition: all .8s cubic-bezier(.25, .4, .45, 1.4);
+}
+
+.allCards > div:hover{
+  flex: 5;
 }
