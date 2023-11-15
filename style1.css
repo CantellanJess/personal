@@ -123,3 +123,8 @@ li {
   transform: translateY(-20px);
   right: 20px;
 }
+
+.card:hover{
+  /*transform: skew(-8deg,8deg);*/
+  box-shadow: 20px 10px 5px;
+} 
