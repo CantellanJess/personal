@@ -59,10 +59,6 @@ li {
     background-color:  rgb(34, 48, 60);
 }
 
-/*.card:hover{
-  transform: translateY(-20px);
-}*/
-
 /* Style for accordion headers */
 .accordion-header {
     background-color: rgb(255, 255, 255); /* Change the background color */
