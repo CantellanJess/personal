@@ -53,7 +53,7 @@ li {
 #allCards{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-content: center;
     border-radius: 35px;
     padding: 2% 1% 2% 1%;
@@ -136,3 +136,7 @@ li {
   /*transform: skew(-8deg,8deg);*/
   box-shadow: 20px 10px 5px;
 } 
+
+.cards{
+  padding: 2% 10% 2% 10%;
+}
