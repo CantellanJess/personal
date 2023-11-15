@@ -45,6 +45,8 @@ li {
 
 #allCards{
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
     border-radius: 35px;
     padding: 2% 1% 2% 1%;
 }
