@@ -43,14 +43,12 @@ li {
     text-indent: 180px;
 }
 
-/*#allCards{
+#allCards{
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
     border-radius: 35px;
-    padding: 2% 1% 2% 5%;
-
-}*/
+    padding: 2% 1% 2% 1%;
+}
 
 #icons{
     padding-top: 5%; 
