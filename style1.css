@@ -101,7 +101,6 @@ li {
 
 .allCards{
   display: flex;
-  flex-wrap: wrap;
   height: 30rem;
   gap: 1rem;
 }
