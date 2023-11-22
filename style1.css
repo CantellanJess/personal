@@ -23,7 +23,9 @@ main{
   color: rgb(34, 48, 60); 
 }
 
-
+p{
+  color: rgb(255, 255, 255);
+}
 
 section{
     background-color:  rgb(255, 255, 255);
