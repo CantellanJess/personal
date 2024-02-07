@@ -1,62 +1,43 @@
 body{
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font: 1.2rem "Fira Sans", sans-serif;
   font-size: 25px;
-  background-color:  rgb(255, 255, 255);
+  text-align: center; 
+  border: 10px ridge black;
+  border-radius: 35px;
+  padding: 50px;
 }
 
-header{ 
+/* icon section */
+main{
+  text-align: center; 
+  border: 8px ridge black; 
+  border-radius: 35px;
+  padding: 30px;
+} 
+/* header{ 
   background-color:  rgb(255, 255, 255);
   color: rgb(34, 48, 60);  
-  padding: 5% 1% 2% 1%;
-} 
+}  */
 
-main{
-  background-color:  rgb(255, 255, 255);
-  color: rgb(34, 48, 60); 
-}
-
-nav{
-  vertical-align: center; 
-  height: 200px;
-  align-content: center;
+/* nav{
   display: flex;
-}
-
-img{
-  border-radius: 35px;
-  width: 300px;
-  height: 250px;
-  border-radius: 35px;
 }
 
 p{
   color: rgb(255, 255, 255);
 }
 
-section{
-    background-color:  rgb(255, 255, 255);
-    color: rgb(34, 48, 60); 
-    padding: 5%, 5%, 50%, 50%;
-}
-
 footer {
     background-color:  rgb(255, 255, 255);
     color: rgb(34, 48, 60); 
     text-align: center;
-}
+} */
 
-h1, h2, h3 { 
+/* h1, h2, h3 { 
     font-family: Verdana, sans-serif; 
     padding-top: 1%; 
     text-align: center;
   }
-
-li { 
-    list-style-type: none; 
-	  text-align: center;
-    padding-inline: 20px;
-    text-indent: 180px;
-}
 
 #allCards{
     align-content: center;
@@ -76,35 +57,6 @@ li {
     border: 80px ridge rgb(2, 3, 4); 
 }
 
-/* Style for accordion headers */
-.accordion-header {
-    background-color: rgb(255, 255, 255); /* Change the background color */
-    color: rgb(255, 255, 255); /* Change the text color */
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  /* Style for accordion content (hidden by default) */
-  .accordion-content {
-    display: none;
-    padding: 10px;
-  }
-  
-  /* Style for accordion content when active */
-  .accordion-item.active .accordion-content {
-    display: block;
-  }
-  
-  /* Style for accordion when hovered */
-  .accordion-header:hover {
-    background-color: rgb(255, 255, 255); /* Change the background color on hover */
-  }
-  
-  /* Style for accordion when clicked/active */
-  .accordion-item.active .accordion-header {
-    background-color: rgb(255, 255, 255); /* Change the background color for active header */
-  }
-
 #frontEnd{
   transform: skew(-8deg,0deg);
   box-shadow: 20px 10px 5px;
@@ -113,8 +65,8 @@ li {
 #grad1 {
   height: 200px;
   background-color: red; /* For browsers that do not support gradients */
-  background-image: linear-gradient(to right, red , yellow);
-}
+  /* background-image: linear-gradient(to right, red , yellow);
+} */ */
 /*
 .allCards{
   display: flex;
@@ -135,6 +87,6 @@ li {
 }
 */
 
-.card:hover{
+/* .card:hover{
   opacity: 0.5;
-} 
+}  */
