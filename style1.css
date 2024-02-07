@@ -58,6 +58,7 @@ li {
     align-content: center;
     border-radius: 35px;
     padding: 1% 10% 2% 1%;
+  
 }
 
 #icons{
@@ -67,6 +68,7 @@ li {
 
 #card{
     background-color:  rgb(34, 48, 60);
+    border: black;
 }
 
 /* Style for accordion headers */
@@ -135,7 +137,7 @@ li {
 
 .card:hover{
   /*transform: skew(-8deg,8deg);*/
-  box-shadow: 20px 10px 5px;
+  
 } 
 
 .cards{
