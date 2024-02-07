@@ -12,26 +12,25 @@ main{
   text-align: center; 
   border: 8px ridge black; 
   border-radius: 35px;
-  padding: 30px;
+  padding: 25px;
 } 
-/* header{ 
-  background-color:  rgb(255, 255, 255);
-  color: rgb(34, 48, 60);  
-}  */
 
-/* nav{
+header{ 
+  text-align: center; 
+  padding: 25px;
+} 
+
+nav{
+  padding: 50px;
   display: flex;
-}
-
-p{
-  color: rgb(255, 255, 255);
+  height: 8rem;
 }
 
 footer {
     background-color:  rgb(255, 255, 255);
     color: rgb(34, 48, 60); 
     text-align: center;
-} */
+} 
 
 /* h1, h2, h3 { 
     font-family: Verdana, sans-serif; 
@@ -66,7 +65,7 @@ footer {
   height: 200px;
   background-color: red; /* For browsers that do not support gradients */
   /* background-image: linear-gradient(to right, red , yellow);
-} */ */
+} */ 
 /*
 .allCards{
   display: flex;
