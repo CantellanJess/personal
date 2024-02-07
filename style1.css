@@ -10,17 +10,23 @@ header{
   padding: 5% 1% 2% 1%;
 } 
 
+main{
+  background-color:  rgb(255, 255, 255);
+  color: rgb(34, 48, 60); 
+}
+
+nav{
+  vertical-align: center; 
+  height: 200px;
+  align-content: center;
+  display: flex;
+}
 
 img{
   border-radius: 35px;
   width: 300px;
   height: 250px;
   border-radius: 35px;
-}
-
-main{
-  background-color:  rgb(255, 255, 255);
-  color: rgb(34, 48, 60); 
 }
 
 p{
@@ -30,6 +36,7 @@ p{
 section{
     background-color:  rgb(255, 255, 255);
     color: rgb(34, 48, 60); 
+    padding: 5%, 5%, 50%, 50%;
 }
 
 footer {
@@ -52,23 +59,21 @@ li {
 }
 
 #allCards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     align-content: center;
-    border-radius: 35px;
-    padding: 1% 10% 2% 1%;
-  
+    width: 250px; height: 200px;
+    
 }
 
 #icons{
-    padding-top: 5%; 
+    padding-top: 2%; 
+    padding-left: 20%;
+    padding-left: 2%;
     display: flex;
 }
 
 #card{
     background-color:  rgb(34, 48, 60);
-    border: black;
+    border: 80px ridge rgb(2, 3, 4); 
 }
 
 /* Style for accordion headers */
@@ -131,15 +136,5 @@ li {
 */
 
 .card:hover{
-  transform: translateY(-20px);
-  bottom: 20px;
-}
-
-.card:hover{
-  /*transform: skew(-8deg,8deg);*/
-  
+  opacity: 0.5;
 } 
-
-.cards{
-  padding: 2% 10% 2% 10%;
-}
