@@ -11,8 +11,21 @@ nav{
   margin-top: 30px;
   text-align: center;
   -webkit-text-fill-color: #11809C;
-
 }
+
+.icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the icons horizontally */
+  align-items: center;
+}
+
+.icon {
+  width: 100px; /* Adjust width of each icon */
+  height: 100px; /* Adjust height of each icon */
+  margin: 10px; /* Adjust spacing between icons */
+}
+
 
 .card {
   margin-top: 40px;
