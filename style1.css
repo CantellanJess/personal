@@ -17,12 +17,12 @@ nav{
   display: flex;
   flex-wrap: wrap;
   justify-content: center; /* Center the icons horizontally */
-  align-items: center;
+  margin-right: 200px;
 }
 
 .icon {
   width: 100px; /* Adjust width of each icon */
-  height: 100px; /* Adjust height of each icon */
+  height: 120px; /* Adjust height of each icon */
   margin: 10px; /* Adjust spacing between icons */
 }
 
