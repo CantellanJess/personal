@@ -3,6 +3,9 @@ body{
   font-size: 25px;
 }
 
+#title{
+  text-align: center;
+}
 footer { 
   text-align: center;
   background-color: rgb(34, 48, 60);
