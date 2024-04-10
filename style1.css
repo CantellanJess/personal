@@ -31,11 +31,11 @@ h2{
   width: 100px; /* Adjust width of each icon */
   height: 120px; /* Adjust height of each icon */
   margin: 10px; /* Adjust spacing between icons */
-}
+} 
 
 .card-img {
   width: 100%;
-  height: auto;
+  height: 25rem;
 }
 
 .card-content {
@@ -65,10 +65,11 @@ h2{
 } 
 
 .card {
+  margin-top: 40px;
   border: 1px solid black;
   border-radius: 8px;
   overflow: hidden;
-  width: 44rem;  /*Adjust as needed */
+  width: calc(50% - 10px);  /*Adjust as needed */
   margin-right: 20px;
   margin-bottom: 20px; /* Adjust vertical spacing between cards */
 }
@@ -82,9 +83,3 @@ footer {
   padding: 1% 0 1% 0; 
 } 
 
- .card {
-  margin-top: 40px;
-  border: 1px solid black;
-  border-radius: 8px;
-  overflow: hidden;
-} 
