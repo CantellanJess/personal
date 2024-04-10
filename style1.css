@@ -32,16 +32,6 @@ h2{
   margin: 10px; /* Adjust spacing between icons */
 }
 
-
-.card {
-  margin-top: 40px;
-  border: 1px solid black;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 200px;
-  height: 250px;
-}
-
 .card-img {
   width: 100%;
   height: auto;
@@ -49,15 +39,15 @@ h2{
 
 .card-content {
   padding: 20px;
-}
+} 
 
 .card-title {
   margin-top: 0;
-}
+} 
 
 .card-text {
   color: #666;
-}
+} 
 
 .btn {
   display: inline-block;
@@ -68,27 +58,32 @@ h2{
   border-radius: 4px;
 } 
 
-
 .card-container {
   display: flex;
   flex-wrap: wrap;
-}
+} 
 
 .card {
   border: 1px solid black;
   border-radius: 8px;
   overflow: hidden;
-  width: calc(50% - 20px); /* Adjust as needed */
-  margin-right: 20px; /* Adjust spacing between cards */
+  width: calc(50% - 20px);  /*Adjust as needed */
+  margin-right: 20px;
   margin-bottom: 20px; /* Adjust vertical spacing between cards */
 }
 
 .card:last-child {
   margin-right: 0; /* Remove margin from the last card */
-}
+} 
 
 footer { 
   text-align: center;
   padding: 1% 0 1% 0; 
 } 
 
+ .card {
+  margin-top: 40px;
+  border: 1px solid black;
+  border-radius: 8px;
+  overflow: hidden;
+} 
