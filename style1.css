@@ -68,7 +68,7 @@ h2{
   border: 1px solid black;
   border-radius: 8px;
   overflow: hidden;
-  width: calc(50% - 20px);  /*Adjust as needed */
+  width: 44rem;  /*Adjust as needed */
   margin-right: 20px;
   margin-bottom: 20px; /* Adjust vertical spacing between cards */
 }
