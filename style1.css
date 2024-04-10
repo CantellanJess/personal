@@ -24,7 +24,6 @@ h2{
   flex-wrap: wrap;
   justify-content: center; /* Center the icons horizontally */
   margin-right: 200px;
-  margin-bottom: 200px;
 }
 
 .icon {
