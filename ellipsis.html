@@ -15,32 +15,115 @@
         </script>
 
         <style>
-            body{
+            body {
                 background-color: #01212e;
+                padding-top: 2rem;
             }
 
-            h1, h2, p{
+            h1, h2, p {
                 color: #d9d9d9;
                 text-align: center;
             }
 
-            p{
-                color: #d9d9d9;
-                text-align:justify;
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
 
-            img{
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            p {
+                color: #d9d9d9;
+                text-align: justify;
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            img {
                 border-radius: 10%;
                 border-color: #d9d9d9;
                 border-style: solid;
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 2rem;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                max-height: 400px;
+                width: auto;
+                object-fit: contain;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .btn-outline-secondary {
+                color: #d9d9d9;
+                border-color: #d9d9d9;
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+                transition: all 0.3s ease;
+            }
+
+            .btn-outline-secondary:hover {
+                background-color: #d9d9d9;
+                color: #01212e;
+                transform: translateY(-2px);
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .logo-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    padding-top: 1rem;
+                }
+
+                h1 {
+                    font-size: 2rem;
+                }
+
+                h2 {
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    font-size: 1rem;
+                    padding: 0 1rem;
+                }
+
+                .col-10 {
+                    padding: 0 1rem;
+                }
+
+                .btn-outline-secondary {
+                    width: 100%;
+                    margin-top: 1rem;
+                }
+
+                img {
+                    max-height: 300px;
+                    width: auto;
+                }
             }
         </style>
         <body>
             <div class="b-example-divider"></div>
             <div class="container col-xxl-8 px-4 py-5">
                 <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-                    <div class="col-10 col-sm-8 col-lg-6">
-                        <img src="images/ellipsislogo.png" class="d-block mx-lg-auto img-fluid" alt="Ellipsis Logo" width="700" height="500">
+                    <div class="col-12 col-sm-8 col-lg-6">
+                        <div class="logo-container">
+                            <img src="images/ellipsislogo.png" class="img-fluid" alt="Ellipsis Logo">
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <h1>Ellipsis Innovations</h1>
@@ -49,7 +132,7 @@
                              As a proud Latino-founded company, we are dedicated to serve those within the community by recognizing culture and elevating clients who wish to make a difference in the lives of others.
                               For this reason, Ellipsis Innovations is a proud start-up company who aspires to provide services to all while enhancing personal connections among their clients. </p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                            <a href="index.html"button class="btn btn-outline-secondary btn-lg px-4" type="button">Back to Home</a>
+                            <a href="index.html" class="btn btn-outline-secondary btn-lg px-4">Back to Home</a>
                         </div>
                     </div>
                 </div>
