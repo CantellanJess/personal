@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Essential meta tags for proper mobile rendering and PWA support -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Pomodoro Timer</title>
+    <style>
+        /* CSS Variables for theme customization */
+        :root {
+            --primary-color: #FF6B6B;    /* Main app color - used for work mode */
+            --secondary-color: #4ECDC4;   /* Secondary color - used for break mode */
+            --background-color: #f8f9fa;  /* Page background */
+            --text-color: #343a40;        /* Main text color */
+            --container-bg: white;        /* Timer container background */
+            --input-border: #dee2e6;      /* Border color for inputs */
+            --ring-bg: #e9ecef;          /* Timer ring background color */
+            --header-height: 60px;        /* Height for header elements */
+            --container-padding: 2.5rem;  /* Standard padding for containers */
+            --button-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --container-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        /* Adjust spacing for mobile devices */
+        @media (max-width: 768px) {
+            :root {
+                --container-padding: 1.5rem;
+                --header-height: 50px;
+            }
+        }
+
+        /* Dark mode color scheme */
+        [data-theme="dark"] {
+            --primary-color: #FF7B7B;
+            --secondary-color: #4ECDC4;
+            --background-color: #1a1a1a;
+            --text-color: #f8f9fa;
+            --container-bg: #2d2d2d;
+            --input-border: #495057;
+            --ring-bg: #343a40;
+            --button-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --container-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Reset default styles and fix mobile tap highlight */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Main body styles with flex centering */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: -webkit-fill-available; /* Fix for mobile Safari */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all var(--transition-speed) ease;
+            padding: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Fix for mobile Safari viewport height */
+        html {
+            height: -webkit-fill-available;
+            scroll-behavior: smooth;
+        }
+
+        /* Theme control buttons container */
+        .theme-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* Shared styles for theme and color buttons */
+        .theme-toggle, .color-themes-btn {
+            background: var(--container-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all var(--transition-speed) ease;
+            box-shadow: var(--button-shadow);
+            height: 42px;
+            width: 140px;  /* Fixed width instead of min-width */
+            justify-content: center;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Icon and text styles for theme buttons */
+        .theme-toggle .icon, .color-themes-btn .icon {
+            font-size: 1.2rem;
+            width: 20px;    /* Fixed width for icons */
+            text-align: center;
+        }
+
+        .theme-toggle .text, .color-themes-btn .text {
+            flex: 1;        /* Take remaining space */
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* Hover effects for theme buttons */
+        .theme-toggle:hover, .color-themes-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-color: var(--secondary-color);
+        }
+
+        /* Main timer container styles */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            padding: var(--container-padding);
+            border-radius: 30px;
+            background: var(--container-bg);
+            box-shadow: var(--container-shadow);
+            transition: all var(--transition-speed) ease;
+            margin: 1rem;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Timer circle container */
+        .timer-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin: 2.5rem auto;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* SVG progress ring styles */
+        .progress-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.15));
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 15;
+            stroke-linecap: round;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-ring .background {
+            stroke: var(--ring-bg);
+        }
+
+        .progress-ring .progress {
+            stroke: var(--primary-color);
+            transform-origin: center;
+            transform: rotate(0deg);
+            stroke-dasharray: CIRCUMFERENCE;
+            stroke-dashoffset: 0;
+        }
+
+        /* Timer display text */
+        .time-display {
+            position: relative;
+            font-size: min(4rem, 12vw);
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            transform: none;
+        }
+
+        /* Work/Break mode switch styles */
+        .mode-switch {
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: var(--ring-bg);
+            border-radius: 20px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Individual mode button styles */
+        .mode-btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 15px;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+
+        /* Active mode button state */
+        .mode-btn.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Timer control buttons container */
+        .controls {
+            margin-top: 2.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Settings section styles */
+        .settings {
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--ring-bg);
+        }
+
+        /* Individual setting group styles */
+        .setting-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .setting-group label {
+            font-weight: 500;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .setting-group input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--container-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            text-align: center;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .setting-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            /* Adjust theme controls for mobile */
+            .theme-controls {
+                top: 10px;
+                right: 10px;
+                flex-direction: column;
+            }
+
+            /* Adjust button sizes for mobile */
+            .theme-toggle, .color-themes-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+                height: 38px;
+                width: 120px;  /* Fixed width for mobile */
+            }
+
+            .theme-toggle .icon, .color-themes-btn .icon {
+                font-size: 1.1rem;
+                width: 18px;    /* Slightly smaller icons for mobile */
+            }
+
+            /* Adjust container spacing for mobile */
+            .container {
+                margin: 0.5rem;
+                border-radius: 25px;
+            }
+
+            /* Reduce heading size on mobile */
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Adjust controls spacing for mobile */
+            .controls {
+                gap: 0.5rem;
+            }
+
+            /* Adjust mode buttons for mobile */
+            .mode-btn {
+                padding: 0.7rem 1.4rem;
+                font-size: 0.95rem;
+            }
+
+            /* Adjust settings layout for mobile */
+            .settings {
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .setting-group {
+                width: calc(50% - 0.5rem);
+            }
+        }
+
+        /* Landscape mode optimizations */
+        @media (max-width: 768px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 0.5rem;
+            }
+
+            .container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 1rem;
+                align-items: center;
+            }
+
+            .timer-container {
+                grid-row: span 2;
+                margin: 1rem auto;
+            }
+
+            .mode-switch, .controls {
+                margin: 0;
+            }
+
+            .settings {
+                margin-top: 0;
+            }
+        }
+
+        /* Add loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced heading styles */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Enhanced control buttons */
+        .controls button {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 15px;
+            background: var(--primary-color);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            font-weight: 500;
+            box-shadow: var(--button-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .controls button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            transform: translateY(-100%);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .controls button:hover::before {
+            transform: translateY(0);
+        }
+
+        .controls button:active {
+            transform: translateY(1px);
+        }
+
+        /* Add subtle hover effect to mode buttons */
+        .mode-btn:hover {
+            background: rgba(var(--text-color-rgb), 0.05);
+        }
+
+        .mode-btn.active:hover {
+            transform: scale(1.05);
+        }
+
+        /* Add pulsing animation to active timer */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .timer-container.running .time-display {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Add smooth transition for progress ring */
+        .progress-ring circle {
+            transform-origin: center;
+            transform: rotate(-90deg);
+            transition: stroke-dashoffset var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Add ripple effect styles */
+        button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced focus styles */
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.3);
+        }
+
+        /* Add transition for button display changes */
+        button {
+            transition: all var(--transition-speed) ease, transform 0.1s ease;
+        }
+
+        /* Enhance number input styling */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Add hover effect to settings inputs */
+        .setting-group input:hover {
+            border-color: var(--primary-color);
+        }
+
+        /* Add transition for mode switching */
+        .mode-switch {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Add subtle gradient to background */
+        body {
+            background: linear-gradient(135deg, 
+                var(--background-color), 
+                color-mix(in srgb, var(--background-color) 95%, var(--primary-color)));
+        }
+
+        /* Add glass effect to container */
+        .container {
+            background: color-mix(in srgb, var(--container-bg) 90%, transparent);
+            backdrop-filter: blur(10px);
+            border: 1px solid color-mix(in srgb, var(--container-bg) 90%, var(--primary-color));
+        }
+
+        /* Add styles for the play/pause symbol animation */
+        .action-symbol {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            opacity: 0;
+            z-index: 2;
+            color: var(--primary-color);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+
+        @keyframes symbolPopup {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+        }
+
+        /* Color picker dialog styles */
+        .color-picker-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .color-picker-content {
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--container-shadow);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .color-picker-content h3 {
+            margin: 0 0 1.5rem;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .color-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .color-input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .color-input-group label {
+            flex: 1;
+            color: var(--text-color);
+        }
+
+        .color-input-group input[type="color"] {
+            width: 60px;
+            height: 40px;
+            padding: 0;
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .preset-colors {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preset {
+            padding: 0.8rem;
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--container-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .preset:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .close-dialog {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .close-dialog:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--button-shadow);
+        }
+
+        @media (max-width: 768px) {
+            .color-picker-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
+
+            .color-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .color-input-group input[type="color"] {
+                width: 100%;
+            }
+        }
+
+        /* Add styles for ring pulse and ripple animations */
+        @keyframes ringPulse {
+            0% {
+                transform: scale(1) rotate(-90deg);
+                filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.15));
+            }
+            50% {
+                transform: scale(1.02) rotate(-90deg);
+                filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.2));
+            }
+            100% {
+                transform: scale(1) rotate(-90deg);
+                filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.15));
+            }
+        }
+
+        @keyframes ringRipple {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Add ripple container */
+        .ripple-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ring-ripple {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 15px solid;
+            border-radius: 50%;
+            opacity: 0;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme and color control buttons -->
+    <div class="theme-controls">
+        <button class="theme-toggle">
+            <span class="icon">🌞</span>
+            <span class="text">Light Mode</span>
+        </button>
+        <button class="color-themes-btn">
+            <span class="icon">🎨</span>
+            <span class="text">Theme</span>
+        </button>
+        <div class="color-picker-dialog">
+            <div class="color-picker-content">
+                <h3>Choose Theme Colors</h3>
+                <div class="color-inputs">
+                    <div class="color-input-group">
+                        <label for="primary-color">Work Mode Color:</label>
+                        <input type="color" id="primary-color" value="#FF6B6B">
+                    </div>
+                    <div class="color-input-group">
+                        <label for="secondary-color">Break Mode Color:</label>
+                        <input type="color" id="secondary-color" value="#4ECDC4">
+                    </div>
+                </div>
+                <div class="preset-colors">
+                    <button class="preset" data-primary="#FF6B6B" data-secondary="#4ECDC4">Default</button>
+                    <button class="preset" data-primary="#6B5B95" data-secondary="#88B04B">Nature</button>
+                    <button class="preset" data-primary="#FF9A8B" data-secondary="#86A8E7">Sunset</button>
+                    <button class="preset" data-primary="#45B7D1" data-secondary="#F98866">Ocean</button>
+                </div>
+                <button class="close-dialog">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main timer container -->
+    <div class="container">
+        <h1>Pomodoro Timer</h1>
+        
+        <!-- Work/Break mode switch -->
+        <div class="mode-switch">
+            <button class="mode-btn active" data-mode="work">
+                <span class="icon">💼</span>
+                <span class="text">Work</span>
+            </button>
+            <button class="mode-btn" data-mode="break">
+                <span class="icon">☕</span>
+                <span class="text">Break</span>
+            </button>
+        </div>
+
+        <!-- Timer display with progress ring -->
+        <div class="timer-container">
+            <svg class="progress-ring" width="300" height="300">
+                <circle class="background" cx="150" cy="150" r="130"/>
+                <circle class="progress" cx="150" cy="150" r="130"/>
+            </svg>
+            <div class="action-symbol"></div>
+            <div class="time-display">20:00</div>
+        </div>
+
+        <!-- Timer control buttons -->
+        <div class="controls">
+            <button id="start">
+                <span class="icon">▶</span>
+                <span class="text">Start</span>
+            </button>
+            <button id="pause">
+                <span class="icon">⏸</span>
+                <span class="text">Pause</span>
+            </button>
+            <button id="reset">
+                <span class="icon">⟳</span>
+                <span class="text">Reset</span>
+            </button>
+        </div>
+
+        <!-- Duration settings -->
+        <div class="settings">
+            <div class="setting-group">
+                <label for="work-duration">Work Duration (min)</label>
+                <input type="number" id="work-duration" value="20" min="1" max="60">
+            </div>
+            <div class="setting-group">
+                <label for="break-duration">Break Duration (min)</label>
+                <input type="number" id="break-duration" value="5" min="1" max="30">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const icon = themeToggle.querySelector('.icon');
+        const text = themeToggle.querySelector('.text');
+
+        // Function to update ring colors based on current theme and mode
+        function updateRingColors() {
+            const ringBackground = document.querySelector('.progress-ring .background');
+            const ringProgress = document.querySelector('.progress-ring .progress');
+            
+            const ringBgColor = getComputedStyle(document.documentElement).getPropertyValue('--ring-bg').trim();
+            const activeColor = currentMode === 'work' ? 
+                getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() :
+                getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim();
+            
+            ringBackground.style.stroke = ringBgColor;
+            ringProgress.style.stroke = activeColor;
+        }
+
+        // Function to toggle between light and dark mode
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            
+            if (isDark) {
+                document.documentElement.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                text.textContent = 'Dark Mode';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.textContent = '🌞';
+                text.textContent = 'Light Mode';
+            }
+            
+            updateRingColors();
+        }
+
+        // Initialize theme based on system preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            icon.textContent = '🌞';
+            text.textContent = 'Light Mode';
+        }
+
+        // Add click event listener to theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Timer elements
+        const timeDisplay = document.querySelector('.time-display');
+        const progressRing = document.querySelector('.progress');
+        const startButton = document.getElementById('start');
+        const pauseButton = document.getElementById('pause');
+        const resetButton = document.getElementById('reset');
+        const workDurationInput = document.getElementById('work-duration');
+        const breakDurationInput = document.getElementById('break-duration');
+        const modeBtns = document.querySelectorAll('.mode-btn');
+
+        // Calculate circumference for progress ring
+        const CIRCUMFERENCE = 2 * Math.PI * 130;
+        progressRing.style.strokeDasharray = CIRCUMFERENCE;
+        progressRing.style.strokeDashoffset = '0';
+
+        // Timer state variables
+        let timeLeft;
+        let totalTime;
+        let timerId = null;
+        let isRunning = false;
+        let currentMode = 'work';
+
+        // Function to switch between work and break modes
+        function switchMode(mode) {
+            currentMode = mode;
+            modeBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+            
+            // Update timer duration based on mode
+            const duration = mode === 'work' ? 
+                parseInt(workDurationInput.value) : 
+                parseInt(breakDurationInput.value);
+            
+            // Stop the timer without showing the pause animation
+            if (isRunning) {
+                clearInterval(timerId);
+                isRunning = false;
+                document.querySelector('.timer-container').classList.remove('running');
+                startButton.style.display = 'inline-flex';
+                pauseButton.style.display = 'none';
+                timeDisplay.style.animation = '';
+            }
+            
+            updateTimer(duration);
+
+            // Update progress ring color based on mode
+            const color = mode === 'work' ? 
+                getComputedStyle(document.documentElement).getPropertyValue('--primary-color') :
+                getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
+            
+            progressRing.style.stroke = color;
+        }
+
+        // Function to update timer display and progress
+        function updateTimer(duration) {
+            totalTime = duration * 60;
+            timeLeft = totalTime;
+            updateDisplay();
+            updateProgress();
+        }
+
+        // Update the time display
+        function updateDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // Add minute pulse animation
+            if (seconds === 0 && timeLeft > 0) {
+                // Pulse the ring
+                const ring = document.querySelector('.progress-ring');
+                ring.style.animation = 'ringPulse 1s ease-in-out';
+                
+                // Create and animate ripple
+                const rippleContainer = document.querySelector('.ripple-container');
+                const ripple = document.createElement('div');
+                ripple.className = 'ring-ripple';
+                ripple.style.borderColor = currentMode === 'work' ? 
+                    getComputedStyle(document.documentElement).getPropertyValue('--primary-color') :
+                    getComputedStyle(document.documentElement).getPropertyValue('--secondary-color');
+                rippleContainer.appendChild(ripple);
+                
+                ripple.style.animation = 'ringRipple 1.5s ease-out forwards';
+                
+                // Remove ripple element after animation
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1500);
+                
+                // Remove ring pulse animation after it completes
+                setTimeout(() => {
+                    ring.style.animation = '';
+                }, 1000);
+            }
+        }
+
+        // Update the progress ring
+        function updateProgress() {
+            const progress = timeLeft / totalTime;
+            const offset = CIRCUMFERENCE * (1 - progress);
+            progressRing.style.strokeDashoffset = offset;
+        }
+
+        // Function to show action symbol
+        function showActionSymbol(symbol) {
+            const actionSymbol = document.querySelector('.action-symbol');
+            actionSymbol.textContent = symbol;
+            actionSymbol.style.animation = 'symbolPopup 1s ease-out forwards';
+            
+            // Remove animation after it completes
+            setTimeout(() => {
+                actionSymbol.style.animation = '';
+                actionSymbol.textContent = '';
+            }, 1000);
+        }
+
+        // Function to start the timer
+        function startTimer() {
+            if (!isRunning) {
+                showActionSymbol('▶');
+                isRunning = true;
+                document.querySelector('.timer-container').classList.add('running');
+                startButton.style.display = 'none';
+                pauseButton.style.display = 'inline-flex';
+                
+                timerId = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                        updateProgress();
+                        
+                        // Add pulse animation when less than 10 seconds
+                        if (timeLeft <= 10) {
+                            timeDisplay.style.animation = 'pulse 1s ease-in-out infinite';
+                        }
+                    } else {
+                        clearInterval(timerId);
+                        isRunning = false;
+                        document.querySelector('.timer-container').classList.remove('running');
+                        startButton.style.display = 'inline-flex';
+                        pauseButton.style.display = 'none';
+                        timeDisplay.style.animation = '';
+                        
+                        // Auto-switch modes when timer ends
+                        const nextMode = currentMode === 'work' ? 'break' : 'work';
+                        switchMode(nextMode);
+                        
+                        // Show completion notification
+                        if ('Notification' in window && Notification.permission === 'granted') {
+                            new Notification(currentMode === 'work' ? 
+                                'Work session completed! Time for a break!' :
+                                'Break time is over! Back to work!');
+                        } else {
+                            alert(currentMode === 'work' ? 
+                                'Work session completed! Time for a break!' :
+                                'Break time is over! Back to work!');
+                        }
+                    }
+                }, 1000);
+            }
+        }
+
+        // Function to pause the timer
+        function pauseTimer() {
+            showActionSymbol('⏸');
+            clearInterval(timerId);
+            isRunning = false;
+            document.querySelector('.timer-container').classList.remove('running');
+            startButton.style.display = 'inline-flex';
+            pauseButton.style.display = 'none';
+            timeDisplay.style.animation = '';
+        }
+
+        // Reset the timer
+        function resetTimer() {
+            pauseTimer();
+            // Remove the action symbol animation that might have been triggered by pauseTimer
+            const actionSymbol = document.querySelector('.action-symbol');
+            actionSymbol.style.animation = '';
+            actionSymbol.textContent = '';
+            
+            const duration = currentMode === 'work' ? 
+                parseInt(workDurationInput.value) : 
+                parseInt(breakDurationInput.value);
+            updateTimer(duration);
+        }
+
+        // Event listeners for controls
+        startButton.addEventListener('click', startTimer);
+        pauseButton.addEventListener('click', pauseTimer);
+        resetButton.addEventListener('click', resetTimer);
+        
+        // Event listeners for duration inputs
+        workDurationInput.addEventListener('change', () => {
+            if (currentMode === 'work') {
+                const actionSymbol = document.querySelector('.action-symbol');
+                actionSymbol.style.animation = '';
+                actionSymbol.textContent = '';
+                resetTimer();
+            }
+        });
+        
+        breakDurationInput.addEventListener('change', () => {
+            if (currentMode === 'break') {
+                const actionSymbol = document.querySelector('.action-symbol');
+                actionSymbol.style.animation = '';
+                actionSymbol.textContent = '';
+                resetTimer();
+            }
+        });
+
+        // Event listeners for mode buttons
+        modeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const actionSymbol = document.querySelector('.action-symbol');
+                actionSymbol.style.animation = '';
+                actionSymbol.textContent = '';
+                switchMode(btn.dataset.mode);
+            });
+        });
+
+        // Initialize the UI
+        document.addEventListener('DOMContentLoaded', () => {
+            // Request notification permission
+            if ('Notification' in window) {
+                Notification.requestPermission();
+            }
+            
+            // Hide pause button initially
+            pauseButton.style.display = 'none';
+            
+            // Initialize timer
+            switchMode('work');
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size/2;
+                const y = e.clientY - rect.top - size/2;
+                
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Color theme functionality
+        const colorThemeBtn = document.querySelector('.color-themes-btn');
+        const colorPickerDialog = document.querySelector('.color-picker-dialog');
+        const closeDialogBtn = document.querySelector('.close-dialog');
+        const primaryColorInput = document.getElementById('primary-color');
+        const secondaryColorInput = document.getElementById('secondary-color');
+        const presetButtons = document.querySelectorAll('.preset');
+
+        // Function to update theme colors
+        function updateThemeColors(primary, secondary) {
+            document.documentElement.style.setProperty('--primary-color', primary);
+            document.documentElement.style.setProperty('--secondary-color', secondary);
+            updateRingColors();
+        }
+
+        // Show color picker dialog
+        colorThemeBtn.addEventListener('click', () => {
+            colorPickerDialog.style.display = 'flex';
+        });
+
+        // Close color picker dialog
+        closeDialogBtn.addEventListener('click', () => {
+            colorPickerDialog.style.display = 'none';
+        });
+
+        // Close dialog when clicking outside
+        colorPickerDialog.addEventListener('click', (e) => {
+            if (e.target === colorPickerDialog) {
+                colorPickerDialog.style.display = 'none';
+            }
+        });
+
+        // Update colors when inputs change
+        primaryColorInput.addEventListener('input', () => {
+            updateThemeColors(primaryColorInput.value, secondaryColorInput.value);
+        });
+
+        secondaryColorInput.addEventListener('input', () => {
+            updateThemeColors(primaryColorInput.value, secondaryColorInput.value);
+        });
+
+        // Handle preset button clicks
+        presetButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const primary = button.dataset.primary;
+                const secondary = button.dataset.secondary;
+                primaryColorInput.value = primary;
+                secondaryColorInput.value = secondary;
+                updateThemeColors(primary, secondary);
+            });
+        });
+
+        // Add ripple container to timer container in HTML
+        const timerContainer = document.querySelector('.timer-container');
+        const rippleContainer = document.createElement('div');
+        rippleContainer.className = 'ripple-container';
+        timerContainer.appendChild(rippleContainer);
+    </script>
+</body>
+</html>
