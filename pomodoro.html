@@ -822,6 +822,15 @@
     </div>
 
     <script>
+        // Timer state variables
+        let timeLeft;
+        let totalTime;
+        let isRunning = false;
+        let currentMode = 'work';
+        let animationFrameId = null;
+        let lastUpdateTime = null;
+        let remainingTime = 0;
+
         // Theme toggle functionality
         const themeToggle = document.querySelector('.theme-toggle');
         const icon = themeToggle.querySelector('.icon');
@@ -883,13 +892,6 @@
         progressRing.style.strokeDasharray = CIRCUMFERENCE;
         progressRing.style.strokeDashoffset = '0';
 
-        // Timer state variables
-        let timeLeft;
-        let totalTime;
-        let timerId = null;
-        let isRunning = false;
-        let currentMode = 'work';
-
         // Function to switch between work and break modes
         function switchMode(mode) {
             currentMode = mode;
@@ -904,12 +906,7 @@
             
             // Stop the timer without showing the pause animation
             if (isRunning) {
-                clearInterval(timerId);
-                isRunning = false;
-                document.querySelector('.timer-container').classList.remove('running');
-                startButton.style.display = 'inline-flex';
-                pauseButton.style.display = 'none';
-                timeDisplay.style.animation = '';
+                pauseTimer();
             }
             
             updateTimer(duration);
@@ -926,6 +923,7 @@
         function updateTimer(duration) {
             totalTime = duration * 60;
             timeLeft = totalTime;
+            remainingTime = totalTime;
             updateDisplay();
             updateProgress();
         }
@@ -994,9 +992,20 @@
                 startButton.style.display = 'none';
                 pauseButton.style.display = 'inline-flex';
                 
-                timerId = setInterval(() => {
-                    if (timeLeft > 0) {
-                        timeLeft--;
+                lastUpdateTime = Date.now();
+                remainingTime = timeLeft;
+                
+                function update() {
+                    if (!isRunning) return;
+                    
+                    const currentTime = Date.now();
+                    const elapsed = Math.floor((currentTime - lastUpdateTime) / 1000);
+                    
+                    if (elapsed > 0) {
+                        remainingTime -= elapsed;
+                        timeLeft = Math.max(0, remainingTime);
+                        lastUpdateTime = currentTime;
+                        
                         updateDisplay();
                         updateProgress();
                         
@@ -1004,38 +1013,47 @@
                         if (timeLeft <= 10) {
                             timeDisplay.style.animation = 'pulse 1s ease-in-out infinite';
                         }
-                    } else {
-                        clearInterval(timerId);
-                        isRunning = false;
-                        document.querySelector('.timer-container').classList.remove('running');
-                        startButton.style.display = 'inline-flex';
-                        pauseButton.style.display = 'none';
-                        timeDisplay.style.animation = '';
                         
-                        // Auto-switch modes when timer ends
-                        const nextMode = currentMode === 'work' ? 'break' : 'work';
-                        switchMode(nextMode);
-                        
-                        // Show completion notification
-                        if ('Notification' in window && Notification.permission === 'granted') {
-                            new Notification(currentMode === 'work' ? 
-                                'Work session completed! Time for a break!' :
-                                'Break time is over! Back to work!');
-                        } else {
-                            alert(currentMode === 'work' ? 
-                                'Work session completed! Time for a break!' :
-                                'Break time is over! Back to work!');
+                        if (timeLeft <= 0) {
+                            isRunning = false;
+                            document.querySelector('.timer-container').classList.remove('running');
+                            startButton.style.display = 'inline-flex';
+                            pauseButton.style.display = 'none';
+                            timeDisplay.style.animation = '';
+                            
+                            // Auto-switch modes when timer ends
+                            const nextMode = currentMode === 'work' ? 'break' : 'work';
+                            switchMode(nextMode);
+                            
+                            // Show completion notification
+                            if ('Notification' in window && Notification.permission === 'granted') {
+                                new Notification(currentMode === 'work' ? 
+                                    'Work session completed! Time for a break!' :
+                                    'Break time is over! Back to work!');
+                            } else {
+                                alert(currentMode === 'work' ? 
+                                    'Work session completed! Time for a break!' :
+                                    'Break time is over! Back to work!');
+                            }
+                            return;
                         }
                     }
-                }, 1000);
+                    
+                    animationFrameId = requestAnimationFrame(update);
+                }
+                
+                update();
             }
         }
 
         // Function to pause the timer
         function pauseTimer() {
             showActionSymbol('⏸');
-            clearInterval(timerId);
             isRunning = false;
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
             document.querySelector('.timer-container').classList.remove('running');
             startButton.style.display = 'inline-flex';
             pauseButton.style.display = 'none';
