@@ -73,21 +73,33 @@
     }
 
     /* Dark mode specific styles */
-    [data-bs-theme="dark"] .navbar {
-      background-color: var(--bs-dark) !important;
+    [data-bs-theme="dark"] {
+      --bs-body-bg: #1a3c3c;
+      --bs-body-bg-rgb: 26, 60, 60;
+      --bs-body-color: #e9ecef;
+      --bs-body-color-rgb: 233, 236, 239;
+      background: linear-gradient(135deg, #1a3c3c 0%, #0d2b2b 100%);
     }
-    
+
+    [data-bs-theme="dark"] .navbar {
+      background-color: rgba(26, 60, 60, 0.95) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
     [data-bs-theme="dark"] .navbar-toggler {
       border-color: var(--bs-light);
     }
-    
+
     [data-bs-theme="dark"] .navbar-toggler-icon {
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
     [data-bs-theme="dark"] .icon-square {
-      background-color: var(--bs-dark) !important;
+      background-color: rgba(26, 60, 60, 0.8) !important;
       color: var(--bs-light) !important;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
 
     [data-bs-theme="dark"] .icon-square svg {
@@ -97,6 +109,38 @@
     [data-bs-theme="dark"] .icon-square .bi-git,
     [data-bs-theme="dark"] .icon-square .bi-bootstrap-fill {
       fill: var(--bs-light);
+    }
+
+    [data-bs-theme="dark"] .bg-body-tertiary {
+      background-color: rgba(26, 60, 60, 0.8) !important;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    [data-bs-theme="dark"] .border {
+      border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    [data-bs-theme="dark"] .btn-primary {
+      background-color: #008080 !important;
+      border-color: #008080 !important;
+    }
+
+    [data-bs-theme="dark"] .btn-primary:hover {
+      background-color: #006666 !important;
+      border-color: #006666 !important;
+    }
+
+    [data-bs-theme="dark"] .text-body-secondary {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+
+    [data-bs-theme="dark"] .border-bottom {
+      border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    [data-bs-theme="dark"] .border-top {
+      border-color: rgba(255, 255, 255, 0.1) !important;
     }
 
     /* Add styles for light mode navbar */
@@ -127,7 +171,14 @@
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <!-- Brand/Logo -->
-        <a class="navbar-brand" href="#section4">Jessi Cantellan</a>
+        <a class="navbar-brand" href="#section4">
+          Jessi Cantellan 
+          <span class="ms-2">
+            <i class="fas fa-circle" style="color: #FF6B6B; font-size: 0.8em;"></i>
+            <i class="fas fa-circle" style="color: #4ECDC4; font-size: 0.8em;"></i>
+            <i class="fas fa-circle" style="color: #45B7D1; font-size: 0.8em;"></i>
+          </span>
+        </a>
         
         <!-- Toggler Button for Collapsible Menu -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
