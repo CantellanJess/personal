@@ -32,13 +32,13 @@
       cursor: pointer;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
-      background-color: #87BBA2 !important;
-      border-color: #87BBA2 !important;
+      background-color: #008080 !important;
+      border-color: #008080 !important;
     }
     .theme-toggle:hover {
       transform: scale(1.1);
-      background-color: #3B6064 !important;
-      border-color: #3B6064 !important;
+      background-color: #006666 !important;
+      border-color: #006666 !important;
     }
     .theme-toggle i {
       font-size: 1.5rem;
@@ -59,13 +59,13 @@
       cursor: pointer;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
-      background-color: #87BBA2 !important;
-      border-color: #87BBA2 !important;
+      background-color: #008080 !important;
+      border-color: #008080 !important;
     }
     .back-to-top:hover {
       transform: scale(1.1);
-      background-color: #3B6064 !important;
-      border-color: #3B6064 !important;
+      background-color: #006666 !important;
+      border-color: #006666 !important;
     }
     .back-to-top i {
       font-size: 1.5rem;
@@ -74,30 +74,30 @@
 
     /* Dark mode specific styles */
     [data-bs-theme="dark"] {
-      --bs-body-bg: #364958;
-      --bs-body-bg-rgb: 54, 73, 88;
-      --bs-body-color: #C9E4CA;
-      --bs-body-color-rgb: 201, 228, 202;
-      background: linear-gradient(135deg, #364958 0%, #3B6064 100%);
+      --bs-body-bg: #1a3c3c;
+      --bs-body-bg-rgb: 26, 60, 60;
+      --bs-body-color: #e9ecef;
+      --bs-body-color-rgb: 233, 236, 239;
+      background: linear-gradient(135deg, #1a3c3c 0%, #0d2b2b 100%);
     }
 
     [data-bs-theme="dark"] .navbar {
-      background-color: rgba(54, 73, 88, 0.95) !important;
+      background-color: rgba(26, 60, 60, 0.95) !important;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-
+    
     [data-bs-theme="dark"] .navbar-toggler {
-      border-color: #C9E4CA;
+      border-color: var(--bs-light);
     }
-
+    
     [data-bs-theme="dark"] .navbar-toggler-icon {
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.75)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 
     [data-bs-theme="dark"] .icon-square {
-      background-color: rgba(59, 96, 100, 0.8) !important;
-      color: #C9E4CA !important;
+      background-color: rgba(26, 60, 60, 0.8) !important;
+      color: var(--bs-light) !important;
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
     }
@@ -112,7 +112,7 @@
     }
 
     [data-bs-theme="dark"] .bg-body-tertiary {
-      background-color: rgba(59, 96, 100, 0.8) !important;
+      background-color: rgba(26, 60, 60, 0.8) !important;
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
     }
@@ -122,33 +122,17 @@
     }
 
     [data-bs-theme="dark"] .btn-primary {
-      background-color: #87BBA2 !important;
-      border-color: #87BBA2 !important;
-      color: #364958 !important;
-      font-weight: 600;
+      background-color: #008080 !important;
+      border-color: #008080 !important;
     }
 
     [data-bs-theme="dark"] .btn-primary:hover {
-      background-color: #C9E4CA !important;
-      border-color: #C9E4CA !important;
-      color: #364958 !important;
-    }
-
-    [data-bs-theme="dark"] .btn-secondary {
-      background-color: #3B6064 !important;
-      border-color: #3B6064 !important;
-      color: #C9E4CA !important;
-      font-weight: 600;
-    }
-
-    [data-bs-theme="dark"] .btn-secondary:hover {
-      background-color: #364958 !important;
-      border-color: #364958 !important;
-      color: #C9E4CA !important;
+      background-color: #006666 !important;
+      border-color: #006666 !important;
     }
 
     [data-bs-theme="dark"] .text-body-secondary {
-      color: #C9E4CA !important;
+      color: rgba(255, 255, 255, 0.7) !important;
     }
 
     [data-bs-theme="dark"] .border-bottom {
@@ -172,56 +156,6 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-
-    /* Update the theme toggle button colors */
-    .theme-toggle {
-      background-color: #87BBA2 !important;
-      border-color: #87BBA2 !important;
-    }
-
-    .theme-toggle:hover {
-      background-color: #3B6064 !important;
-      border-color: #3B6064 !important;
-    }
-
-    /* Update the back to top button colors */
-    .back-to-top {
-      background-color: #87BBA2 !important;
-      border-color: #87BBA2 !important;
-    }
-
-    .back-to-top:hover {
-      background-color: #3B6064 !important;
-      border-color: #3B6064 !important;
-    }
-
-    /* Update the navbar brand dots colors */
-    .navbar-brand .fa-circle:nth-child(1) {
-      color: #87BBA2 !important;
-    }
-
-    .navbar-brand .fa-circle:nth-child(2) {
-      color: #C9E4CA !important;
-    }
-
-    .navbar-brand .fa-circle:nth-child(3) {
-      color: #3B6064 !important;
-    }
-
-    /* Update card hover effects */
-    [data-bs-theme="dark"] .bg-body-tertiary:hover {
-      background-color: rgba(87, 187, 162, 0.1) !important;
-      transition: background-color 0.3s ease;
-    }
-
-    /* Update link colors */
-    [data-bs-theme="dark"] a {
-      color: #87BBA2;
-    }
-
-    [data-bs-theme="dark"] a:hover {
-      color: #C9E4CA;
-    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -240,9 +174,9 @@
         <a class="navbar-brand" href="#section4">
           Jessi Cantellan 
           <span class="ms-2">
-            <i class="fas fa-circle" style="color: #87BBA2; font-size: 0.8em;"></i>
-            <i class="fas fa-circle" style="color: #C9E4CA; font-size: 0.8em;"></i>
-            <i class="fas fa-circle" style="color: #3B6064; font-size: 0.8em;"></i>
+            <i class="fas fa-circle" style="color: #FF6B6B; font-size: 0.8em;"></i>
+            <i class="fas fa-circle" style="color: #4ECDC4; font-size: 0.8em;"></i>
+            <i class="fas fa-circle" style="color: #45B7D1; font-size: 0.8em;"></i>
           </span>
         </a>
         
@@ -254,11 +188,11 @@
         <!-- Collapsible Content -->
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item px-2"><a href="#section4" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item px-2"><a href="#section1" class="nav-link">About</a></li>
-            <li class="nav-item px-2"><a href="#section2" class="nav-link">Skills</a></li>
-            <li class="nav-item px-2"><a href="#section3" class="nav-link">Projects</a></li>
-            <li class="nav-item px-2"><a href="ellipsis.html" class="nav-link">Ellipsis</a></li>
+            <li class="nav-item"><a href="#section4" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="#section1" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#section2" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a href="#section3" class="nav-link">Projects</a></li>
+            <li class="nav-item"><a href="ellipsis.html" class="nav-link">Ellipsis</a></li>
           </ul>
         </div>
       </div>
